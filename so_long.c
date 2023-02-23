@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 13:08:32 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/02/23 13:20:47 by jaiveca-         ###   ########.fr       */
+/*   Created: 2023/02/23 12:15:33 by jaiveca-          #+#    #+#             */
+/*   Updated: 2023/02/23 13:19:59 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "so_long.h"
 
-# include "libft/libft.h"
-# include <mlx.h>
-# include <fcntl.h>
-# include <string.h>
-# include <errno.h>
-# include <sys/wait.h>
+int	main(void)
+{
+	void	*mlx;
+	void	*mlx_win;
 
-
-
-#endif
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	mlx_loop(mlx);
+}
