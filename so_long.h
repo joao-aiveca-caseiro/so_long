@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:08:32 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/02/23 13:20:47 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:02:21 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,24 @@
 # include <errno.h>
 # include <sys/wait.h>
 
+typedef	struct s_win
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	int		height;
+	int		width;
+}			t_win;
 
+typedef	struct s_img
+{
+	t_win	win;
+	void	*img_ptr;
+	char	*addr;
+	int		h;
+	int		w;
+	int		bpp;
+	int		endian;
+	int		line_len;
+}			t_img;
 
 #endif
