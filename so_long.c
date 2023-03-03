@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 12:15:33 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/01 19:43:09 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/03 03:07:01 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,25 @@ void	put_pixel_img(t_img img, int x, int y, int color)
 	}
 }
 
+int	exit_tutorial(t_win *window)
+{
+	mlx_destroy_window(window->mlx_ptr, window->win_ptr);
+	exit (0);
+}
+
+int	key_press(int keycode, t_win *window)
+{
+	ft_printf("keycode=%i\n", keycode);
+	if (keycode == 65307)
+		exit_tutorial(window);
+	return (0);
+}
+
 int	main(void)
 {
 	t_win	so_long;
 
-	so_long = new_program(1920, 1080, "So Long");
-
-	/*t_img	image;
-	
-	image = new_img(300, 300, so_long);
-	put_pixel_img(image, 150, 150, 0x00FFFFFF);
-	mlx_put_image_to_window(image.win.mlx_ptr, image.win.win_ptr, image.img_ptr, 0, 0);
-	*/
+	so_long = new_program(1000, 1000, "So Long");
 
 	t_img	image;
 	
@@ -79,5 +86,7 @@ int	main(void)
 	put_pixel_img(image, 32, 32, 0x00FFFFFF);
 	mlx_put_image_to_window(image.win.mlx_ptr, image.win.win_ptr, image.img_ptr, 500, 500);
 
+	mlx_hook(so_long.win_ptr, 17, 0, exit_tutorial, &so_long);
+	mlx_hook(so_long.win_ptr, 2, 1L << 0, key_press, &so_long);
 	mlx_loop(so_long.mlx_ptr);
 }

@@ -3,7 +3,7 @@ SRCS		= so_long.c
 OBJS		= ${SRCS:.c=.o}
 NAME		= so_long
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
 
 .c.o:
 			${CC} ${CFLAGS} -I/usr/include -Imlx_linux -O3 -c $< -o ${<:.c=.o}
