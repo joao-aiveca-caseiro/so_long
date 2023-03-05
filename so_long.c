@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 12:15:33 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/03 03:07:01 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/05 04:23:00 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,38 @@ int	key_press(int keycode, t_win *window)
 	return (0);
 }
 
-int	main(void)
+void	read_map(char *arg)
 {
-	t_win	so_long;
+	int		map_file;
+	char	*map_string;
+	char	*temp;
 
-	so_long = new_program(1000, 1000, "So Long");
+	map_file = open(arg, O_RDONLY);
+	if (map_file == -1)
+		exit (1);
+	temp = ft_calloc(1, 1);
+	map_string = ft_calloc(1, 1);
+	while (read(map_file, temp, 1) != 0)
+		map_string = strjoin_gnl(map_string, temp);
+	ft_printf("%s\n", map_string);
+	free(map_string);
+}
 
-	t_img	image;
+int	main(int argc, char **argv)
+{
+	if (argc == 2)
+		read_map(argv[1]);
+	// t_win	so_long;
+
+	// so_long = new_program(1000, 1000, "So Long");
+
+	// t_img	image;
 	
-	image = new_file_img("gecko.xpm", so_long);
-	put_pixel_img(image, 32, 32, 0x00FFFFFF);
-	mlx_put_image_to_window(image.win.mlx_ptr, image.win.win_ptr, image.img_ptr, 500, 500);
+	// image = new_file_img("gecko.xpm", so_long);
+	// put_pixel_img(image, 32, 32, 0x00FFFFFF);
+	// mlx_put_image_to_window(image.win.mlx_ptr, image.win.win_ptr, image.img_ptr, 500, 500);
 
-	mlx_hook(so_long.win_ptr, 17, 0, exit_tutorial, &so_long);
-	mlx_hook(so_long.win_ptr, 2, 1L << 0, key_press, &so_long);
-	mlx_loop(so_long.mlx_ptr);
+	// mlx_hook(so_long.win_ptr, 17, 0, exit_tutorial, &so_long);
+	// mlx_hook(so_long.win_ptr, 2, 1L << 0, key_press, &so_long);
+	// mlx_loop(so_long.mlx_ptr);
 }
