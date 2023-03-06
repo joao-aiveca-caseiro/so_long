@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:08:32 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/06 01:26:51 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:52:10 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,22 @@ typedef struct s_map
 	int	player;
 	int	exit;
 	int	collect;
-	int illegal;
+	int	illegal;
+	int	player_x;
+	int	player_y;
+	int	exit_x;
+	int	exit_y;
 }		t_map;
 
+
+t_map	coords_player_exit(char **map, t_map coords);
+char	**map_flood_fill(char **map, int x, int y);
+int		map_path_check(char **map);
+int		map_rectangle_check(char **map);
+int		map_wall_check(char **map);
+int		map_char_check(char **map);
+void	val_error(char *msg);
+void	validate_map(char **map);
+void	read_map(char *arg);
 
 #endif

@@ -1,5 +1,8 @@
 LIBFT		= ./libft/libft.a
-SRCS		= so_long.c
+SRCS		= so_long.c\
+				map_content_checks.c\
+				map_path_check.c\
+				map_read_validate.c
 OBJS		= ${SRCS:.c=.o}
 NAME		= so_long
 CC			= cc
