@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:08:32 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/01 16:02:21 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/06 01:26:51 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <errno.h>
 # include <sys/wait.h>
 
-typedef	struct s_win
+typedef struct s_win
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -28,7 +28,7 @@ typedef	struct s_win
 	int		width;
 }			t_win;
 
-typedef	struct s_img
+typedef struct s_img
 {
 	t_win	win;
 	void	*img_ptr;
@@ -39,5 +39,14 @@ typedef	struct s_img
 	int		endian;
 	int		line_len;
 }			t_img;
+
+typedef struct s_map
+{
+	int	player;
+	int	exit;
+	int	collect;
+	int illegal;
+}		t_map;
+
 
 #endif
