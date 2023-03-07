@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:44:09 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/06 19:23:07 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/07 16:45:03 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ void	validate_map(char **map)
 		val_error("Error: map has no valid path between player and exit.\n");
 }
 
-void	read_map(char *arg)
+char	**read_map(char *arg, t_win window)
 {
 	int		map_file;
 	char	*map_string;
 	char	*temp;
-	char	**map_2d_array;
+	char	**map_for_validation;
+	char	**map_final;
 
 	map_file = open(arg, O_RDONLY);
 	if (map_file == -1)
@@ -44,14 +45,17 @@ void	read_map(char *arg)
 	map_string = ft_calloc(1, 1);
 	while (read(map_file, temp, 1) != 0)
 		map_string = strjoin_gnl(map_string, temp);
-	map_2d_array = ft_split(map_string, '\n');
+	map_for_validation = ft_split(map_string, '\n');
+	map_final = ft_split(map_string, '\n');
 	free(map_string);
 	free(temp);
-	validate_map(map_2d_array);
-	render_map(map_2d_array);
+	validate_map(map_for_validation);
+	render_map(map_final, window);
+	free(map_for_validation);
+	return (map_final);
 }
 
-void	render_map(char **map)
+void	render_map(char **map, t_win window)
 {
 	int	x;
 	int	y;
@@ -63,16 +67,16 @@ void	render_map(char **map)
 		while (map[y][++x])
 		{
 			if (map[y][x] == 'P')
-				render_image(player, x * 32, y * 32);
+				render_image(window, "player", x * 32, y * 32);
 			else if (map[y][x] == 'E')
-				render_image(exit, x * 32, y * 32);
+				render_image(window, "exit", x * 32, y * 32);
 			else if (map[y][x] == 'C')
-				render_image(collect, x * 32, y * 32);
+				render_image(window, "collectible", x * 32, y * 32);
 			else if (map[y][x] == '1')
-				render_image(wall, x * 32, y * 32);
+				render_image(window, "wall", x * 32, y * 32);
 			else if (map[y][x] == '0')
-				render_image(floor, x * 32, y * 32);
+				render_image(window, "floor", x * 32, y * 32);
 		}
-		x = -1
+		x = -1;
 	}
 }

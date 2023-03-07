@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 12:15:33 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/06 18:45:25 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/07 19:20:21 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_win	new_program(int width, int height, char *name)
 	new_program.win_ptr = mlx_new_window(mlx_ptr, width, height, name);
 	new_program.width = width;
 	new_program.height = height;
+	new_program.map = NULL;
 	return (new_program);
 }
 
@@ -66,29 +67,69 @@ int	exit_tutorial(t_win *window)
 	exit (0);
 }
 
+void	player_move(char dir, t_win window)
+{
+	t_map	coords;
+
+	coords.collect = 0;
+	if (coords.player)
+	coords = coords_player_exit(window.map, coords);
+	ft_printf("player is at (%i, %i)", coords.player_x, coords.player_y);
+	if (dir == 'r' && (window.map[coords.player_y][coords.player_x + 1] != '1'))
+	{
+		render_image(window, "floor", coords.player_x * 32, coords.player_y * 32);
+		render_image(window, "player", coords.player_x * 32 + 32, coords.player_y * 32);
+		window.map[coords.player_y][coords.player_x] = '0';
+		window.map[coords.player_y][coords.player_x + 1] = 'P';
+	}
+	else if (dir == 'l' && (window.map[coords.player_y][coords.player_x - 1] != '1'))
+	{
+		render_image(window, "floor", coords.player_x * 32, coords.player_y * 32);
+		render_image(window, "player", coords.player_x * 32 - 32, coords.player_y * 32);
+		window.map[coords.player_y][coords.player_x] = '0';
+		window.map[coords.player_y][coords.player_x - 1] = 'P';
+	}
+	else if (dir == 'd' && (window.map[coords.player_y + 1][coords.player_x] != '1'))
+	{
+		render_image(window, "floor", coords.player_x * 32, coords.player_y * 32);
+		render_image(window, "player", coords.player_x * 32, coords.player_y * 32 + 32);
+		window.map[coords.player_y][coords.player_x] = '0';
+		window.map[coords.player_y + 1][coords.player_x] = 'P';
+	}
+	else if (dir == 'u' && (window.map[coords.player_y - 1][coords.player_x] != '1'))
+	{
+		render_image(window, "floor", coords.player_x * 32, coords.player_y * 32);
+		render_image(window, "player", coords.player_x * 32, coords.player_y * 32 - 32);
+		window.map[coords.player_y][coords.player_x] = '0';
+		window.map[coords.player_y - 1][coords.player_x] = 'P';
+	}
+}
+
 int	key_press(int keycode, t_win *window)
 {
 	ft_printf("keycode=%i\n", keycode);
 	if (keycode == 65307)
 		exit_tutorial(window);
+	if (keycode == 100)
+		player_move('r', *window);
+	if (keycode == 97)
+		player_move('l', *window);
+	if (keycode == 119)
+		player_move('u', *window);
+	if (keycode == 115)
+		player_move('d', *window);
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
+	t_win	so_long;
+
+	so_long = new_program(1000, 1000, "So Long");
 	if (argc == 2)
-		read_map(argv[1]);
-	// t_win	so_long;
+		so_long.map = read_map(argv[1], so_long);
 
-	// so_long = new_program(1000, 1000, "So Long");
-
-	// t_img	image;
-	
-	// image = new_file_img("gecko.xpm", so_long);
-	// put_pixel_img(image, 32, 32, 0x00FFFFFF);
-	// mlx_put_image_to_window(image.win.mlx_ptr, image.win.win_ptr, image.img_ptr, 500, 500);
-
-	// mlx_hook(so_long.win_ptr, 17, 0, exit_tutorial, &so_long);
-	// mlx_hook(so_long.win_ptr, 2, 1L << 0, key_press, &so_long);
-	// mlx_loop(so_long.mlx_ptr);
+	mlx_hook(so_long.win_ptr, 17, 0, exit_tutorial, &so_long);
+	mlx_hook(so_long.win_ptr, 2, 1L << 0, key_press, &so_long);
+	mlx_loop(so_long.mlx_ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:08:32 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/06 18:52:10 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/07 16:56:29 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_win
 	void	*win_ptr;
 	int		height;
 	int		width;
+	char	**map;
 }			t_win;
 
 typedef struct s_img
@@ -61,6 +62,9 @@ int		map_wall_check(char **map);
 int		map_char_check(char **map);
 void	val_error(char *msg);
 void	validate_map(char **map);
-void	read_map(char *arg);
+char	**read_map(char *arg, t_win window);
+void	render_map(char **map, t_win window);
+void	render_image(t_win window, char *filename, int x, int y);
+t_img	new_file_img(char *path, t_win window);
 
 #endif
