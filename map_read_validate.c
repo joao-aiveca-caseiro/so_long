@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_read_validate.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:44:09 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/07 16:45:03 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/08 16:23:38 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	validate_map(char **map)
 		val_error("Error: map has no valid path between player and exit.\n");
 }
 
-char	**read_map(char *arg, t_win window)
+char	**read_map(char *arg)
 {
 	int		map_file;
 	char	*map_string;
@@ -50,7 +50,6 @@ char	**read_map(char *arg, t_win window)
 	free(map_string);
 	free(temp);
 	validate_map(map_for_validation);
-	render_map(map_final, window);
 	free(map_for_validation);
 	return (map_final);
 }
@@ -67,15 +66,15 @@ void	render_map(char **map, t_win window)
 		while (map[y][++x])
 		{
 			if (map[y][x] == 'P')
-				render_image(window, "player", x * 32, y * 32);
+				render_image(window, window.player, x * 32, y * 32);
 			else if (map[y][x] == 'E')
-				render_image(window, "exit", x * 32, y * 32);
+				render_image(window, window.exit, x * 32, y * 32);
 			else if (map[y][x] == 'C')
-				render_image(window, "collectible", x * 32, y * 32);
+				render_image(window, window.collectible, x * 32, y * 32);
 			else if (map[y][x] == '1')
-				render_image(window, "wall", x * 32, y * 32);
+				render_image(window, window.wall, x * 32, y * 32);
 			else if (map[y][x] == '0')
-				render_image(window, "floor", x * 32, y * 32);
+				render_image(window, window.floor, x * 32, y * 32);
 		}
 		x = -1;
 	}

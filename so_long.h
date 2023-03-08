@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:08:32 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/07 16:56:29 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/08 19:36:19 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,9 @@
 # include <errno.h>
 # include <sys/wait.h>
 
-typedef struct s_win
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	int		height;
-	int		width;
-	char	**map;
-}			t_win;
-
 typedef struct s_img
 {
-	t_win	win;
+//	t_win	win;
 	void	*img_ptr;
 	char	*addr;
 	int		h;
@@ -40,6 +31,28 @@ typedef struct s_img
 	int		endian;
 	int		line_len;
 }			t_img;
+
+typedef struct s_size
+{
+	int	width;
+	int	height;
+}		t_size;
+
+typedef struct s_win
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	int		height;
+	int		width;
+	char	**map;
+	int		move_count;
+	t_img	player;
+	t_img	collectible;
+	t_img	exit;
+	t_img	enemy;
+	t_img	floor;
+	t_img	wall;
+}			t_win;
 
 typedef struct s_map
 {
@@ -62,9 +75,10 @@ int		map_wall_check(char **map);
 int		map_char_check(char **map);
 void	val_error(char *msg);
 void	validate_map(char **map);
-char	**read_map(char *arg, t_win window);
+char	**read_map(char *arg);
 void	render_map(char **map, t_win window);
-void	render_image(t_win window, char *filename, int x, int y);
+void	render_image(t_win window, t_img image, int x, int y);
 t_img	new_file_img(char *path, t_win window);
+t_win	load_images(t_win window);
 
 #endif
