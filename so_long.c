@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 12:15:33 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/08 19:45:48 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:14:09 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,43 +93,60 @@ t_win	player_move(char dir, t_win window)
 
 	coords.collect = 0;
 	coords = coords_player_exit(window.map, coords);
-//	ft_printf("player is at (%i, %i)", coords.player_x, coords.player_y);
+	window = move_enemies(window);
 	if (dir == 'r' && (window.map[coords.player_y][coords.player_x + 1] != '1'))
 	{
+		ft_printf("Number of moves: %i\n", window.move_count);
+		if (window.map[coords.player_y][coords.player_x + 1] == 'E' && collectible_count(window) == 0)
+			trigger_victory();
+		if (window.map[coords.player_y][coords.player_x + 1] == 'N')
+			trigger_defeat();
 		render_image(window, window.floor, coords.player_x * 32, coords.player_y * 32);
 		render_image(window, window.player, coords.player_x * 32 + 32, coords.player_y * 32);
 		window.map[coords.player_y][coords.player_x] = '0';
 		window.map[coords.player_y][coords.player_x + 1] = 'P';
 		window.move_count = window.move_count + 1;
-		ft_printf("Number of moves: %i\n", window.move_count);
 	}
 	else if (dir == 'l' && (window.map[coords.player_y][coords.player_x - 1] != '1'))
 	{
+		ft_printf("Number of moves: %i\n", window.move_count);
+		if (window.map[coords.player_y][coords.player_x - 1] == 'E' && collectible_count(window) == 0)
+			trigger_victory();
+		if (window.map[coords.player_y][coords.player_x - 1] == 'N')
+			trigger_defeat();
 		render_image(window, window.floor, coords.player_x * 32, coords.player_y * 32);
 		render_image(window, window.player, coords.player_x * 32 - 32, coords.player_y * 32);
 		window.map[coords.player_y][coords.player_x] = '0';
 		window.map[coords.player_y][coords.player_x - 1] = 'P';
 		window.move_count = window.move_count + 1;
-		ft_printf("Number of moves: %i\n", window.move_count);
 	}
 	else if (dir == 'd' && (window.map[coords.player_y + 1][coords.player_x] != '1'))
 	{
+		ft_printf("Number of moves: %i\n", window.move_count);
+		if (window.map[coords.player_y + 1][coords.player_x] == 'E' && collectible_count(window) == 0)
+			trigger_victory();
+		if (window.map[coords.player_y + 1][coords.player_x] == 'N')
+			trigger_defeat();
 		render_image(window, window.floor, coords.player_x * 32, coords.player_y * 32);
 		render_image(window, window.player, coords.player_x * 32, coords.player_y * 32 + 32);
 		window.map[coords.player_y][coords.player_x] = '0';
 		window.map[coords.player_y + 1][coords.player_x] = 'P';
 		window.move_count = window.move_count + 1;
-		ft_printf("Number of moves: %i\n", window.move_count);
 	}
 	else if (dir == 'u' && (window.map[coords.player_y - 1][coords.player_x] != '1'))
 	{
+		ft_printf("Number of moves: %i\n", window.move_count);
+		if (window.map[coords.player_y - 1][coords.player_x] == 'E' && collectible_count(window) == 0)
+			trigger_victory();
+		if (window.map[coords.player_y - 1][coords.player_x] == 'N')
+			trigger_defeat();
 		render_image(window, window.floor, coords.player_x * 32, coords.player_y * 32);
 		render_image(window, window.player, coords.player_x * 32, coords.player_y * 32 - 32);
 		window.map[coords.player_y][coords.player_x] = '0';
 		window.map[coords.player_y - 1][coords.player_x] = 'P';
 		window.move_count = window.move_count + 1;
-		ft_printf("Number of moves: %i\n", window.move_count);
 	}
+	ft_printf("there are %i collectibles in the map\n", collectible_count(window));
 	return (window);
 }
 
@@ -161,7 +178,7 @@ int	main(int argc, char **argv)
 		map = read_map(argv[1]);
 		map_size = map_size_tiles(map, map_size);
 		so_long = new_program(map_size.width * 32, map_size.height * 32, "So Long");
-		so_long.map = map;
+		so_long.map = spawn_enemies(map);
 		render_map(so_long.map, so_long);
 	}
 	mlx_hook(so_long.win_ptr, 17, 0, exit_tutorial, &so_long);

@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:08:32 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/08 19:36:19 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/13 17:22:21 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <string.h>
 # include <errno.h>
 # include <sys/wait.h>
+# include <time.h>
 
 typedef struct s_img
 {
@@ -80,5 +81,10 @@ void	render_map(char **map, t_win window);
 void	render_image(t_win window, t_img image, int x, int y);
 t_img	new_file_img(char *path, t_win window);
 t_win	load_images(t_win window);
+int	collectible_count(t_win	window);
+void	trigger_victory(void);
+void	trigger_defeat(void);
+char	**spawn_enemies(char **map);
+t_win	move_enemies(t_win window);
 
 #endif

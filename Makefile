@@ -3,7 +3,9 @@ SRCS		= so_long.c\
 				map_content_checks.c\
 				map_path_check.c\
 				map_read_validate.c\
-				img_utils.c
+				img_utils.c\
+				events.c\
+				enemies.c
 OBJS		= ${SRCS:.c=.o}
 NAME		= so_long
 CC			= cc

@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:44:09 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/08 16:23:38 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/13 16:47:48 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	render_map(char **map, t_win window)
 				render_image(window, window.wall, x * 32, y * 32);
 			else if (map[y][x] == '0')
 				render_image(window, window.floor, x * 32, y * 32);
+			else if (map[y][x] == 'N')
+				render_image(window, window.enemy, x * 32, y * 32);
 		}
 		x = -1;
 	}
