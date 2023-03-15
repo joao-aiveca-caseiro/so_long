@@ -5,7 +5,8 @@ SRCS		= so_long.c\
 				map_read_validate.c\
 				img_utils.c\
 				events.c\
-				enemies.c
+				enemies.c\
+				animations.c
 OBJS		= ${SRCS:.c=.o}
 NAME		= so_long
 CC			= clang

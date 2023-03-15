@@ -3,20 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   map_read_validate.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:44:09 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/15 04:28:59 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/15 17:54:42 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+/*
+** Map validation error message (written on stderr)
+*/
 
 void	val_error(char *msg)
 {
 	write(2, msg, ft_strlen(msg));
 	exit (1);
 }
+
+/*
+** Handles the test battery to check if the map is valid, 
+** throwing the respective error message in case of failure. 
+*/
 
 void	validate_map(char **map)
 {
@@ -56,6 +65,12 @@ char	**read_map(char *arg)
 	return (map_final);
 }
 
+/*
+** Places images on the map according to its contents.
+** (Note: Enemies are rendered on a separate function, as they
+** are placed randomly, rather than specified by a map character); 
+*/
+
 void	render_map(char **map, t_win window)
 {
 	int	x;
@@ -77,8 +92,6 @@ void	render_map(char **map, t_win window)
 				render_image(window, window.wall, x * 32, y * 32);
 			else if (map[y][x] == '0')
 				render_image(window, window.floor, x * 32, y * 32);
-			else if (map[y][x] == 'N')
-				render_image(window, window.enemy, x * 32, y * 32);
 		}
 		x = -1;
 	}
