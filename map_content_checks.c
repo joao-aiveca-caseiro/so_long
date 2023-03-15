@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:39:06 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/06 18:55:01 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/14 23:04:46 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,25 @@ int	map_wall_check(char **map)
 		i = -1;
 	}
 	return (0);
+}
+
+int	map_size_check(char **map)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (map[y])
+	{
+		while (map[y][x])
+			x++;
+		y++;
+	}
+	if ((1920 / (x * 32) > 0) && (1080 / (y * 32) > 0))
+		return (0);
+	else
+		return (1);
 }
 
 int	map_char_check(char **map)

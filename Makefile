@@ -8,7 +8,7 @@ SRCS		= so_long.c\
 				enemies.c
 OBJS		= ${SRCS:.c=.o}
 NAME		= so_long
-CC			= cc
+CC			= clang
 CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
 
 .c.o:

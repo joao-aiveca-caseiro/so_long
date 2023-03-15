@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_read_validate.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:44:09 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/13 16:47:48 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/14 23:05:49 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	validate_map(char **map)
 		val_error("Error: map has an invalid type or number of characters.\n");
 	else if (map_path_check(map) == 1)
 		val_error("Error: map has no valid path between player and exit.\n");
+	else if (map_size_check(map) == 1)
+		val_error("Error: map exceeds the maximum window size.\n");
 }
 
 char	**read_map(char *arg)
