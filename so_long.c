@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 12:15:33 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/13 20:14:09 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/15 04:25:31 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_win	new_program(int width, int height, char *name)
 	new_program.win_ptr = mlx_new_window(mlx_ptr, width, height, name);
 	new_program.width = width;
 	new_program.height = height;
-//	new_program.map = NULL;
 	new_program.move_count = 0;
 	new_program = load_images(new_program);
 	return (new_program);
@@ -44,30 +43,6 @@ t_size	map_size_tiles(char **map, t_size map_size)
 	map_size.width = x;
 	map_size.height = y;
 	return (map_size);
-}
-
-t_img	new_img(int width, int height, t_win window)
-{
-	t_img	image;
-
-//	image.win = window;
-	image.img_ptr = mlx_new_image(window.mlx_ptr, width, height);
-	image.addr = mlx_get_data_addr(image.img_ptr, &(image.bpp), \
-	&(image.line_len), &(image.endian));
-	image.w = width;
-	image.h = height;
-	return (image);
-}
-
-t_img	new_file_img(char *path, t_win window)
-{
-	t_img	image;
-
-//	image.win = window;
-	image.img_ptr = mlx_xpm_file_to_image(window.mlx_ptr, path, &(image.w), &(image.h));
-	image.addr = mlx_get_data_addr(image.img_ptr, &(image.bpp), \
-	&(image.line_len), &(image.endian));
-	return (image);
 }
 
 // void	put_pixel_img(t_img img, int x, int y, int color)
@@ -148,6 +123,16 @@ t_win	player_move(char dir, t_win window)
 	}
 	ft_printf("there are %i collectibles in the map\n", collectible_count(window));
 	return (window);
+}
+
+void	free_split(char **split)
+{
+	int	i;
+
+	i = -1;
+	while (*(++i + split))
+		free((*(i + split)));
+	free(split);
 }
 
 int	key_press(int keycode, t_win *window)

@@ -6,13 +6,13 @@
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 17:14:39 by jaiveca-          #+#    #+#             */
-/*   Updated: 2022/10/27 17:25:19 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/15 03:10:33 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(char *s)
 {
 	size_t	i;
 	size_t	len;

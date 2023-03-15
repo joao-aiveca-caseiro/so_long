@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:44:09 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/14 23:05:49 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/15 04:28:59 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**read_map(char *arg)
 	free(map_string);
 	free(temp);
 	validate_map(map_for_validation);
-	free(map_for_validation);
+	free_split(map_for_validation);
 	return (map_final);
 }
 

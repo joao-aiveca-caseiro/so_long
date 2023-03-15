@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:08:32 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/14 23:05:26 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/15 04:25:58 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,31 @@ typedef struct s_map
 }		t_map;
 
 
-t_map	coords_player_exit(char **map, t_map coords);
-char	**map_flood_fill(char **map, int x, int y);
-int		map_path_check(char **map);
-int		map_rectangle_check(char **map);
-int		map_wall_check(char **map);
-int		map_char_check(char **map);
-void	val_error(char *msg);
-void	validate_map(char **map);
-char	**read_map(char *arg);
-void	render_map(char **map, t_win window);
-void	render_image(t_win window, t_img image, int x, int y);
-t_img	new_file_img(char *path, t_win window);
-t_win	load_images(t_win window);
-int		collectible_count(t_win	window);
-void	trigger_victory(void);
-void	trigger_defeat(void);
-char	**spawn_enemies(char **map);
-t_win	move_enemies(t_win window);
-int		map_size_check(char **map);
+t_map			coords_player_exit(char **map, t_map coords);
+char			**map_flood_fill(char **map, int x, int y);
+int				map_path_check(char **map);
+int				map_rectangle_check(char **map);
+int				map_wall_check(char **map);
+int				map_char_check(char **map);
+void			val_error(char *msg);
+void			validate_map(char **map);
+char			**read_map(char *arg);
+void			render_map(char **map, t_win window);
+void			render_image(t_win window, t_img image, int x, int y);
+t_img			new_file_img(char *path, t_win window);
+t_win			load_images(t_win window);
+int				collectible_count(t_win	window);
+void			trigger_victory(void);
+void			trigger_defeat(void);
+char			**spawn_enemies(char **map);
+t_win			move_enemies(t_win window);
+int				map_size_check(char **map);
+
+void			put_pixel_img(t_img img, int x, int y, int color);
+unsigned int	get_pixel_img(t_img img, int x, int y);
+void			make_alpha_img(t_img dst, t_img src, int x, int y);
+void	render_image_alpha(t_win window, t_img image, int x, int y);
+void	free_split(char **split);
+
 
 #endif
