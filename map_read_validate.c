@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_read_validate.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:44:09 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/15 17:54:42 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:16:31 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,30 @@ void	render_map(char **map, t_win window)
 			else if (map[y][x] == 'C')
 				render_image(window, window.collectible, x * 32, y * 32);
 			else if (map[y][x] == '1')
-				render_image(window, window.wall, x * 32, y * 32);
+				render_image_walls(window, x, y);
+				//render_image(window, window.wall_full, x * 32, y * 32);
 			else if (map[y][x] == '0')
 				render_image(window, window.floor, x * 32, y * 32);
 		}
 		x = -1;
 	}
+}
+
+void	render_image_walls(t_win window, int x, int y)
+{
+	ft_printf("%i, %i\n", window.height, window.width);
+	if (y == 0 && x == 0)
+		render_image(window, window.wall_clear, x * 32, y * 32);
+	else if (y == 0)
+		render_image(window, window.wall_top, x * 32, y * 32);
+	else if (y == window.height / 32 - 1 && x == window.width / 32 - 1)
+		render_image(window, window.wall_clear, x * 32, y * 32);
+	else if (y == window.height / 32 - 1)
+		render_image(window, window.wall_bottom, x * 32, y * 32);
+	else if (x == 0)
+		render_image(window, window.wall_left, x * 32, y * 32);
+	else if (x == window.width / 32 - 1)
+		render_image(window, window.wall_right, x * 32, y * 32);
+	else
+		render_image(window, window.wall_full, x * 32, y * 32);
 }

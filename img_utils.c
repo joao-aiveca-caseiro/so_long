@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   img_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:16:08 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/15 15:47:21 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:14:23 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,16 @@ t_img	new_file_img(char *path, t_win window)
 
 t_win	load_images(t_win window)
 {
-	window.player = new_file_img("player.xpm", window);
-	window.enemy = new_file_img("enemy.xpm", window);
-	window.floor = new_file_img("floor.xpm", window);
-	window.wall = new_file_img("wall.xpm", window);
-	window.exit = new_file_img("exit.xpm", window);
-	window.collectible = new_file_img("collectible.xpm", window);
+	window.player = new_file_img("sprites/player.xpm", window);
+	window.enemy = new_file_img("sprites/enemy.xpm", window);
+	window.floor = new_file_img("sprites/floor.xpm", window);
+	window.wall_full = new_file_img("sprites/wall_full.xpm", window);
+	window.wall_left = new_file_img("sprites/wall_left.xpm", window);
+	window.wall_right = new_file_img("sprites/wall_right.xpm", window);
+	window.wall_top = new_file_img("sprites/wall_top.xpm", window);
+	window.wall_bottom = new_file_img("sprites/wall_bottom.xpm", window);
+	window.wall_clear = new_file_img("sprites/wall_clear.xpm", window);
+	window.exit = new_file_img("sprites/exit.xpm", window);
+	window.collectible = new_file_img("sprites/collectible.xpm", window);
 	return (window);
 }

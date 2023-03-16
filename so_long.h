@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:08:32 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/15 18:30:58 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:14:45 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,21 +67,26 @@ typedef struct s_animation
 
 typedef struct s_win
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	int		height;
-	int		width;
-	char	**map;
-	int		move_count;
-	int		frame_count;
-	t_img	player;
-	t_img	collectible;
-	t_img	exit;
-	t_img	enemy;
-	t_img	floor;
-	t_img	wall;
-	t_animation anim;
-}			t_win;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	int			height;
+	int			width;
+	char		**map;
+	int			move_count;
+	int			frame_count;
+	t_img		player;
+	t_img		collectible;
+	t_img		exit;
+	t_img		enemy;
+	t_img		floor;
+	t_img		wall_full;
+	t_img		wall_left;
+	t_img		wall_right;
+	t_img		wall_top;
+	t_img		wall_bottom;
+	t_img		wall_clear;
+	t_animation	anim;
+}				t_win;
 
 typedef struct s_map
 {
@@ -118,6 +123,7 @@ void	animate_enemies(t_win window, int sprite_nb);
 void	free_split(char **split);
 t_win	load_animations(t_win window);
 int		close_window(t_win *window);
+void	render_image_walls(t_win window, int x, int y);
 
 
 #endif

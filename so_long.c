@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 12:15:33 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/15 19:20:16 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:08:36 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ int	close_window(t_win *window)
 t_win	player_move(char dir, t_win window)
 {
 	t_map	coords;
+	char	*move_count;
 	char	*move_count_string;
 
 	coords.collect = 0;
 	coords = coords_player_exit(window.map, coords);
 	window = move_enemies(window);
-	render_image(window, window.wall, 32, 0);
-	render_image(window, window.wall, 64, 0);
+	render_image(window, window.wall_top, 32, 0);
+	render_image(window, window.wall_top, 64, 0);
 	if (dir == 'r' && (window.map[coords.player_y][coords.player_x + 1] != '1'))
 	{
 		if (window.map[coords.player_y][coords.player_x + 1] == 'E' && collectible_count(window) == 0)
@@ -121,10 +122,10 @@ t_win	player_move(char dir, t_win window)
 			window.move_count = window.move_count + 1;
 		}
 	}
-	move_count_string = ft_strjoin("Moves: ", ft_itoa(window.move_count));
+	move_count = ft_itoa(window.move_count);
+	move_count_string = ft_strjoin("Moves: ", move_count);
 	mlx_string_put(window.mlx_ptr, window.win_ptr, 32, 16, 0x00FF00, move_count_string);
-	ft_printf("%i\n", window.move_count);
-	ft_printf("there are %i collectibles in the map\n", collectible_count(window));
+	free(move_count);
 	free(move_count_string);
 	return (window);
 }

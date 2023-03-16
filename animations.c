@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaiveca- <jaiveca-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:12:12 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/15 17:28:41 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/16 17:25:37 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 t_win	load_animations(t_win window)
 {
-	window.anim.frame_1 = new_file_img("enemy2.xpm", window);
-	window.anim.frame_2 = new_file_img("enemy3.xpm", window);
-	window.anim.frame_3 = new_file_img("enemy4.xpm", window);
-	window.anim.frame_4 = new_file_img("enemy5.xpm", window);
-	window.anim.frame_5 = new_file_img("enemy6.xpm", window);
-	window.anim.frame_6 = new_file_img("enemy7.xpm", window);
-	window.anim.frame_7 = new_file_img("enemy8.xpm", window);
-	window.anim.frame_8 = new_file_img("enemy9.xpm", window);
-	window.anim.frame_9 = new_file_img("enemy10.xpm", window);
-	window.anim.frame_10 = new_file_img("enemy11.xpm", window);
-	window.anim.frame_11 = new_file_img("enemy12.xpm", window);
-	window.anim.frame_12 = new_file_img("enemy13.xpm", window);
-	window.anim.frame_13 = new_file_img("enemy14.xpm", window);
-	window.anim.frame_14 = new_file_img("enemy15.xpm", window);
-	window.anim.frame_15 = new_file_img("enemy16.xpm", window);
-	window.anim.frame_16 = new_file_img("enemy17.xpm", window);
-	window.anim.frame_17 = new_file_img("enemy18.xpm", window);
-	window.anim.frame_18 = new_file_img("enemy19.xpm", window);
-	window.anim.frame_19 = new_file_img("enemy20.xpm", window);
-	window.anim.frame_20 = new_file_img("enemy21.xpm", window);
-	window.anim.frame_21 = new_file_img("enemy22.xpm", window);
-	window.anim.frame_22 = new_file_img("enemy23.xpm", window);
-	window.anim.frame_23 = new_file_img("enemy24.xpm", window);
+	window.anim.frame_1 = new_file_img("sprites/enemy2.xpm", window);
+	window.anim.frame_2 = new_file_img("sprites/enemy3.xpm", window);
+	window.anim.frame_3 = new_file_img("sprites/enemy4.xpm", window);
+	window.anim.frame_4 = new_file_img("sprites/enemy5.xpm", window);
+	window.anim.frame_5 = new_file_img("sprites/enemy6.xpm", window);
+	window.anim.frame_6 = new_file_img("sprites/enemy7.xpm", window);
+	window.anim.frame_7 = new_file_img("sprites/enemy8.xpm", window);
+	window.anim.frame_8 = new_file_img("sprites/enemy9.xpm", window);
+	window.anim.frame_9 = new_file_img("sprites/enemy10.xpm", window);
+	window.anim.frame_10 = new_file_img("sprites/enemy11.xpm", window);
+	window.anim.frame_11 = new_file_img("sprites/enemy12.xpm", window);
+	window.anim.frame_12 = new_file_img("sprites/enemy13.xpm", window);
+	window.anim.frame_13 = new_file_img("sprites/enemy14.xpm", window);
+	window.anim.frame_14 = new_file_img("sprites/enemy15.xpm", window);
+	window.anim.frame_15 = new_file_img("sprites/enemy16.xpm", window);
+	window.anim.frame_16 = new_file_img("sprites/enemy17.xpm", window);
+	window.anim.frame_17 = new_file_img("sprites/enemy18.xpm", window);
+	window.anim.frame_18 = new_file_img("sprites/enemy19.xpm", window);
+	window.anim.frame_19 = new_file_img("sprites/enemy20.xpm", window);
+	window.anim.frame_20 = new_file_img("sprites/enemy21.xpm", window);
+	window.anim.frame_21 = new_file_img("sprites/enemy22.xpm", window);
+	window.anim.frame_22 = new_file_img("sprites/enemy23.xpm", window);
+	window.anim.frame_23 = new_file_img("sprites/enemy24.xpm", window);
 	return (window);
 }
 
