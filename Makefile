@@ -21,7 +21,7 @@ OBJS		= ${SRCS:.c=.o}
 BONUS_OBJS		= ${SRCS_BONUS:.c=.o}
 NAME		= so_long
 NAME_BONUS		= so_long_bonus
-CC			= clang
+CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
 LFLAGS		= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
