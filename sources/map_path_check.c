@@ -6,11 +6,15 @@
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:36:05 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/06 18:54:57 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/17 05:15:32 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+/*
+** Finds the player and exit characters' positions. 
+*/
 
 t_map	coords_player_exit(char **map, t_map coords)
 {
@@ -39,6 +43,11 @@ t_map	coords_player_exit(char **map, t_map coords)
 	return (coords);
 }
 
+/*
+** Using recursion, replaces every "walkable" char of 
+** the map with a placeholder character. 
+*/
+
 char	**map_flood_fill(char **map, int x, int y)
 {
 	if (map[y][x])
@@ -54,6 +63,12 @@ char	**map_flood_fill(char **map, int x, int y)
 	}
 	return (map);
 }
+
+/*
+** Checks if both player and exit characters no longer exist 
+** in the map after running the flood fill, which effectively 
+** means there is a walkable path between the two.
+*/
 
 int	map_path_check(char **map)
 {
