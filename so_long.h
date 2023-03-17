@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:08:32 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/16 18:14:45 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/16 21:57:10 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ t_win	load_images(t_win window);
 int		collectible_count(t_win	window);
 void	trigger_victory(void);
 void	trigger_defeat(void);
-char	**spawn_enemies(char **map);
+char	**spawn_enemies(char **map, int spawned);
 t_win	move_enemies(t_win window);
 int		map_size_check(char **map);
 void	animate_enemies(t_win window, int sprite_nb);

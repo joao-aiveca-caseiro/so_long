@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 18:44:09 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/16 18:16:31 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/16 22:45:08 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ char	**read_map(char *arg)
 
 	map_file = open(arg, O_RDONLY);
 	if (map_file == -1)
+	{
+		perror("Error");
 		exit (1);
+	}
 	temp = ft_calloc(1, 1);
 	map_string = ft_calloc(1, 1);
 	while (read(map_file, temp, 1) != 0)
@@ -90,7 +93,6 @@ void	render_map(char **map, t_win window)
 				render_image(window, window.collectible, x * 32, y * 32);
 			else if (map[y][x] == '1')
 				render_image_walls(window, x, y);
-				//render_image(window, window.wall_full, x * 32, y * 32);
 			else if (map[y][x] == '0')
 				render_image(window, window.floor, x * 32, y * 32);
 		}
@@ -100,13 +102,13 @@ void	render_map(char **map, t_win window)
 
 void	render_image_walls(t_win window, int x, int y)
 {
-	ft_printf("%i, %i\n", window.height, window.width);
-	if (y == 0 && x == 0)
+	if (y == 0 && (x == 0 || x == window.width / 32 - 1))
+		render_image(window, window.wall_clear, x * 32, y * 32);
+	else if (y == window.height / 32 - 1
+		&& (x == window.width / 32 - 1 || x == 0))
 		render_image(window, window.wall_clear, x * 32, y * 32);
 	else if (y == 0)
 		render_image(window, window.wall_top, x * 32, y * 32);
-	else if (y == window.height / 32 - 1 && x == window.width / 32 - 1)
-		render_image(window, window.wall_clear, x * 32, y * 32);
 	else if (y == window.height / 32 - 1)
 		render_image(window, window.wall_bottom, x * 32, y * 32);
 	else if (x == 0)

@@ -6,7 +6,7 @@
 /*   By: jaiveca- <jaiveca-@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 12:15:33 by jaiveca-          #+#    #+#             */
-/*   Updated: 2023/03/16 18:08:36 by jaiveca-         ###   ########.fr       */
+/*   Updated: 2023/03/17 00:11:32 by jaiveca-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ t_win	player_move(char dir, t_win window)
 
 	coords.collect = 0;
 	coords = coords_player_exit(window.map, coords);
-	window = move_enemies(window);
 	render_image(window, window.wall_top, 32, 0);
 	render_image(window, window.wall_top, 64, 0);
 	if (dir == 'r' && (window.map[coords.player_y][coords.player_x + 1] != '1'))
@@ -124,7 +123,8 @@ t_win	player_move(char dir, t_win window)
 	}
 	move_count = ft_itoa(window.move_count);
 	move_count_string = ft_strjoin("Moves: ", move_count);
-	mlx_string_put(window.mlx_ptr, window.win_ptr, 32, 16, 0x00FF00, move_count_string);
+	mlx_string_put(window.mlx_ptr, window.win_ptr, 32, 18, 0xFFFCC9, move_count_string);
+	window = move_enemies(window);
 	free(move_count);
 	free(move_count_string);
 	return (window);
@@ -135,8 +135,8 @@ void	free_split(char **split)
 	int	i;
 
 	i = -1;
-	while (*(++i + split))
-		free((*(i + split)));
+	while (split[++i])
+		free(split[i]);
 	free(split);
 }
 
@@ -177,28 +177,50 @@ int	animate_loop(t_win *window)
 		window->frame_count = 0;
 		sprite_nb = 1;
 	}
-	return(0);
+	return (0);
+}
+
+int	map_extension_check(char *arg)
+{
+	char	*substr;
+
+	substr = ft_substr(arg, ft_strlen(arg) - 4, 4);
+	if (ft_strncmp(substr, ".ber", 5) == 0)
+	{
+		free(substr);
+		return (0);
+	}
+	free(substr);
+	return (1);
+}
+
+void	arg_error(void)
+{
+	write(2, "Error: Please provide, as a single argument, \
+the path to a .ber file.\n", 70);
+	exit (1);
 }
 
 int	main(int argc, char **argv)
 {
 	t_win	so_long;
 	t_size	map_size;
-
 	char	**map;
 
 	so_long.map = NULL;
 	map_size.width = 0;
-	if (argc == 2)
+	if (argc == 2 && map_extension_check(argv[1]) == 0)
 	{
 		map = read_map(argv[1]);
 		map_size = map_size_tiles(map, map_size);
 		so_long = new_program(map_size.width * 32, map_size.height * 32, "So Long");
-		so_long.map = spawn_enemies(map);
+		so_long.map = spawn_enemies(map, 0);
 		render_map(so_long.map, so_long);
 		so_long.frame_count = 0;
 		so_long = load_animations(so_long);
 	}
+	else
+		arg_error();
 	mlx_hook(so_long.win_ptr, 17, 0, close_window, &so_long);
 	mlx_hook(so_long.win_ptr, 2, 1L << 0, key_press, &so_long);
 	mlx_loop_hook(so_long.mlx_ptr, animate_loop, &so_long);

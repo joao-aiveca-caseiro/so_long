@@ -11,13 +11,14 @@ OBJS		= ${SRCS:.c=.o}
 NAME		= so_long
 CC			= clang
 CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
+LFLAGS		= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 .c.o:
-			${CC} ${CFLAGS} -I/usr/include -Imlx_linux -O3 -c $< -o ${<:.c=.o}
+			${CC} ${CFLAGS} -I/usr/include -Imlx_linux -c $< -o ${<:.c=.o}
 
 $(NAME):	${OBJS}
 			${MAKE} all -C ./libft
-			${CC} ${CFLAGS} ${OBJS} -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz ${LIBFT} -o ${NAME} 
+			${CC} ${CFLAGS} ${OBJS} ${LFLAGS} ${LIBFT} -o ${NAME} 
 
 
 all:		$(NAME)
